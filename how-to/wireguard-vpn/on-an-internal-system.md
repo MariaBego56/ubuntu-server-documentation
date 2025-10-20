@@ -8,21 +8,35 @@ However, you do have a spare system inside your network that you could use. Here
 To recap, our home network has the `10.10.10.0/24` address, and we want to connect to it from a remote location and be "inserted" into that network as if we were there:
 
 ```
-                       public internet
-10.10.10.11/24
-        home0│            xxxxxx       ppp0 ┌────────┐
-           ┌─┴──┐         xx   xxxxx  ──────┤ router │
-           │    ├─ppp0  xxx       xx        └───┬────┘    home network, .home domain
-           │    │       xx        x             │         10.10.10.0/24
-           │    │        xxx    xxx             └───┬─────────┬─────────┐
-           └────┘          xxxxxx                   │         │         │
-                                                  ┌─┴─┐     ┌─┴─┐     ┌─┴─┐
-                                            wg0 ──┤   │     │   │     │   │
-                                  10.10.10.10/32  │pi4│     │NAS│     │...│
-                                                  │   │     │   │     │   │
-                                                  └───┘     └───┘     └───┘
-Reserved for VPN users:
-10.10.10.10-49
+flowchart LR
+    %% Nodes
+    client[Client<br/>home0 10.10.10.11/24]
+    internet(((Public Internet)))
+    router[[Router<br/>.home = 10.10.10.1]]
+
+    %% Home LAN
+    subgraph home["Home network (.home) — 10.10.10.0/24"]
+      pi4[Raspberry Pi 4]
+      nas[NAS]
+      dots[...]
+    end
+
+    %% Access paths
+    client -- |ppp0| --> internet
+    internet -- |ppp0| --> router
+
+    %% LAN fanout
+    router --- pi4
+    router --- nas
+    router --- dots
+
+    %% WireGuard: entry on Pi4, show peer IP and pool
+    client -.-> |wg0 client| pi4
+    pi4 -.-> |wg0 10.10.10.10/32| client
+
+    vpnrange[Reserved for VPN users:<br/>10.10.10.10–49]
+    vpnrange --- pi4
+
 ```
 
 ## Router changes
