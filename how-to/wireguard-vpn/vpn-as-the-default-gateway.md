@@ -6,15 +6,17 @@ WireGuard can be set up to route all traffic through the VPN, and not just speci
 Here we will assume a scenario where the local network is considered to be "untrusted", and we want to leak as little information as possible about our behaviour on the Internet. This could apply to the case of an airport, or a coffee shop, a conference, a hotel, or any other public network.
 
 ```
-                       public untrusted          ┌── wg0 10.90.90.2/24
-10.90.90.1/24          network/internet          │   VPN network
-        wg0│            xxxxxx            ┌──────┴─┐
-         ┌─┴──┐         xx   xxxxx  ──────┤ VPN gw │
-         │    ├─wlan0  xx       xx   eth0 └────────┘
-         │    │       xx        x 
-         │    │        xxx    xxx
-         └────┘          xxxxxx
-         Laptop
+---
+config:
+  layout: elk
+---
+flowchart RL
+    laptop["Laptop"] -- |wlan0| --> internet((("Public untrusted<br>network / Internet")))
+    vpngw[["VPN gateway"]] -- |eth0| --> internet
+    laptop -. "wg0 10.90.90.1/24" .-> vpngw
+    vpngw -. "wg0 10.90.90.2/24" .-> laptop
+    vpnrange["VPN network<br>10.90.90.0/24"] --- vpngw
+
 ```
 
 For the best results, we need a system we can reach on the internet and that we control. Most commonly this can be a simple small VM in a public cloud, but a home network also works. Here we will assume it's a brand new system that will be configured from scratch for this very specific purpose.
