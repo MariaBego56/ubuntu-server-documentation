@@ -3,26 +3,39 @@
 
 Another usual VPN configuration where one could deploy WireGuard is to connect two distinct networks over the internet. Here is a simplified diagram:
 
-```
-                      ┌─────── WireGuard tunnel ──────┐
-                      │         10.10.9.0/31          │
-                      │                               │
-         10.10.9.0 wgA│               xx              │wgB 10.10.9.1
-                    ┌─┴─┐          xxx  xxxx        ┌─┴─┐
-    alpha site      │   │ext     xx        xx    ext│   │  beta site
-                    │   ├───    x           x    ───┤   │
-    10.10.10.0/24   │   │      xx           xx      │   │  10.10.11.0/24
-                    │   │      x             x      │   │
-                    └─┬─┘      x              x     └─┬─┘
-            10.10.10.1│        xx             x       │10.10.11.1
-    ...┌─────────┬────┘          xx   xxx    xx       └───┬─────────┐...
-       │         │                  xx   xxxxx            │         │
-       │         │                                        │         │
-     ┌─┴─┐     ┌─┴─┐           public internet          ┌─┴─┐     ┌─┴─┐
-     │   │     │   │                                    │   │     │   │
-     └───┘     └───┘                                    └───┘     └───┘
-```
+The following code-block will be rendered as a Mermaid diagram:
 
+```mermaid
+flowchart LR
+  %% Topology: alpha site <—WireGuard—> beta site via public internet
+
+  subgraph alpha["alpha site — 10.10.10.0/24"]
+    wgA["wgA<br/>10.10.10.1<br/>10.10.9.0"]
+    a1["..."]
+    a2["..."]
+    wgA --- a1
+    wgA --- a2
+  end
+
+  subgraph beta["beta site — 10.10.11.0/24"]
+    wgB["wgB<br/>10.10.11.1<br/>10.10.9.1"]
+    b1["..."]
+    b2["..."]
+    wgB --- b1
+    wgB --- b2
+  end
+
+  internet(("public internet"))
+
+  %% External links
+  wgA -. "ext" .- internet
+  internet -. "ext" .- wgB
+
+  %% WireGuard tunnel between sites
+  wgA -. "WireGuard tunnel<br/>10.10.9.0/31" .- wgB
+
+```
+                     
 The goal here is to seamlessly integrate network **alpha** with network **beta**, so that systems on the alpha site can transparently access systems on the beta site, and vice-versa.
 
 Such a setup has a few particular details:
