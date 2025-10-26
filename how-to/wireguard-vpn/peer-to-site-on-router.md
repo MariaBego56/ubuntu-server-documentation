@@ -4,11 +4,8 @@
 
 In this diagram, we are depicting a home network with some devices and a router where we can install WireGuard.
 
-```
----
-config:
-  layout: elk
----
+```mermaid
+
 flowchart LR
  subgraph home["Home network (.home) — 10.10.10.0/24"]
         pi4["Raspberry Pi 4"]
@@ -27,7 +24,6 @@ flowchart LR
     style home fill:#FFD600
 
 ```
-
 Of course, this setup is only possible if you can install software on the router. Most of the time, when it's provided by your ISP, you can't. But some ISPs allow their device to be put into a bridge mode, in which case you can use your own device (a computer, a Raspberry PI, or something else) as the routing device.
 
 Since the router is the default gateway of the network already, this means you can create a whole new network for your VPN users. You also won't have to create any (D)NAT rules since the router is directly reachable from the Internet.
