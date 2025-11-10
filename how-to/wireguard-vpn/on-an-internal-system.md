@@ -7,22 +7,30 @@ However, you do have a spare system inside your network that you could use. Here
 
 To recap, our home network has the `10.10.10.0/24` address, and we want to connect to it from a remote location and be "inserted" into that network as if we were there:
 
-```
-                       public internet
-10.10.10.11/24
-        home0│            xxxxxx       ppp0 ┌────────┐
-           ┌─┴──┐         xx   xxxxx  ──────┤ router │
-           │    ├─ppp0  xxx       xx        └───┬────┘    home network, .home domain
-           │    │       xx        x             │         10.10.10.0/24
-           │    │        xxx    xxx             └───┬─────────┬─────────┐
-           └────┘          xxxxxx                   │         │         │
-                                                  ┌─┴─┐     ┌─┴─┐     ┌─┴─┐
-                                            wg0 ──┤   │     │   │     │   │
-                                  10.10.10.10/32  │pi4│     │NAS│     │...│
-                                                  │   │     │   │     │   │
-                                                  └───┘     └───┘     └───┘
-Reserved for VPN users:
-10.10.10.10-49
+```mermaid
+---
+config:
+  layout: fixed
+---
+flowchart BT
+ subgraph home["home network, .home domain — 10.10.10.0/24"]
+        pi4["pi4"]
+        nas["NAS"]
+        Y["Y"]
+        dots["..."]
+  end
+    host["home0<br>10.10.10.11/24"] -- |ppp0| --> internet(("public internet"))
+    internet -- |ppp0| --> router["router<br>ppp0 (WAN) ↔ LAN (.1)"]
+    router --- pi4 & nas & Y & dots
+    vpn(("VPN network<br>10.10.10.10/32")) -. "wg0<br>10.10.10.10/32" .-> router
+    note["Reserved for VPN users:<br>10.10.10.10–49"] --- vpn
+    style host fill:#E1BEE7
+    style internet fill:#C8E6C9
+    style router fill:#FFD600
+    style vpn fill:#BBDEFB
+    style note fill:#FFE0B2
+    style home fill:#FFF9C4
+
 ```
 
 ## Router changes
