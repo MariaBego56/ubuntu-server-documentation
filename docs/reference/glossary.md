@@ -2282,17 +2282,17 @@ Traceroute
 TTYS
 Teletype Terminals
     TTYS were electromechanical typewriter-like devices used as input/output terminals for telegraph networks and early computers. They sent and received text over serial lines, printing characters on paper instead of displaying them on a screen. Even though the physical machines are mostly gone, the term tty still exists in Unix/Linux systems to represent:
-* A text-based input/output device
-* A terminal session
-* A console connection
+            * A text-based input/output device
+            * A terminal session
+            * A console connection
 
 TXT
 Trusted Execution Technology
     TXT is Intel's hardware-based security technology that creates a trusted execution environment to protect systems from software-based attacks. In other words, TXT was designed to make sure that a computer boots into a trusted and verified state before loading the operating system or applications.
 It protects against:
-* Rootkits
-* Boot-level malware
-* Unauthorized changes to firmware or system software
+            * Rootkits
+            * Boot-level malware
+            * Unauthorized changes to firmware or system software
 
 :::
 
