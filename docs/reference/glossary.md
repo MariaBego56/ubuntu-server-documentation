@@ -496,7 +496,15 @@ containerization
 
 CPU
 Central Processing Unit
-    *Work in Progress*
+    CPU is the "brain" of your computer - it performs calculations and executes instructions.
+    
+    See also:
+    * RangeSize
+    
+    Related topic(s):
+    * {term}`Cores`
+    * {term}`NUMA`
+    
 
 CRL
 Certificate Revocation List
@@ -1594,8 +1602,11 @@ Mail User Agent
 Multipass
     *Work in Progress*
 
+Multiple path
+     Refers to the physical/hardware redundancy (cables, controllers, ports) between server and storage
+
 Multipath
-    *Work in Progress*
+    It is the software that manages and uses multiple paths
 
 Multiview
     *Work in Progress*
@@ -1683,7 +1694,14 @@ Network Time Security
 
 NUMA
 Non-Uniform Memory Access
-    *Work in Progress*
+    NUMA is a memory architecture used in systems with multiple CPUs or multi-core processors where memory access speed depends on memory location.
+
+    See also:
+    * RangeSize
+    
+    Related topic(s):
+    * {term}`Cores`
+    * {term}`CPU`
 
 Nvidia
     *Work in Progress*
@@ -1975,37 +1993,62 @@ quickstart
 
 RAM
 Random Access Memory
-    *Work in Progress*
+    RAM is temporary, fast memory that holds everything your computer is actively using right now.
 
 RangeSize
-    *Work in Progress*
+    RangeSize is the total count or span of elements within a defined range (from minimum to maximum value). {term}`libvirt/virsh` context, it might relate to:
+        * Memory range allocation for {term}`VMs`
+        * {term}`CPU` pinning ranges
+        * {term}`NUMA` node memory ranges
+        * Device address ranges 
 
 RDAC
 Redundant Disk Array Controller
-    *Work in Progress*
+    RDAC is a technology for managing storage arrays with multiple controller paths to ensure high availability and prevent single points of failure.
+    
+    See also:
+    * multiple paths
+    * multipath software
+    * ALUA
 
 RDBMS
 Relational Database Management System
-    *Work in Progress*
+    RDBMS is software that stores and manages data in a structured format using tables with relationships between them.
+    
+    See also:
+    * MySQL
+    * PostgreSQL
+    * Oracle Database
+    * Microsoft SQL
+    * SQLite
+    * MariaDB
+    * IBM Db2
 
 RDN
 Relative Distinguished Name
-    *Work in Progress*
+    RDN is a component of a Distinguished Name ({term}`DN`) in directory services like {term}`LDAP` (Lightweight Directory Access Protocol). It identifies an entry relative to its parent in the directory tree within their immediate context. The RDN must be unique among siblings but can be reused in different branches.
+
+    Related topic(s):
+    * Directory Structure
 
 renderer
-    *Work in Progress*
+    A renderer is a software component that converts data or code into visual output that you can see on screen. It is the part of a program that takes information and "renders" (draws/displays) it for humans to view.
+
+    See also:
+    * Rendering techniques
+    * Types of renderers
 
 REXX
 Restructured Extended Executor
-    *Work in Progress*
+    REXX is a high-level programming language designed to be easy to read, write, and learn. It was created by IBM in the 1970s and is particularly popular on mainframe systems.
 
 RFC
 Request For Comments
-    *Work in Progress*
+    RFC is a formal document that describes specifications, protocols, procedures, and concepts related to internet and networking technologies. Despite the name "Request for Comments," RFCs are the official standards that define how the internet works.
 
 rid
 Relative Identifier
-    *Work in Progress*
+    RID is a component of a security identifier ({term}`SID`) used mainly in Windows security to uniquely identify objects like users, groups, or computers within a domain or local system.
 
 RIP
 Router Information Protocol
@@ -2015,11 +2058,16 @@ Router Information Protocol
     * Networking
 
 RISC-V
-Reduced Instruction Set Computing - Version Five
-    *Work in Progress*
+Reduced Instruction Set Computing
+    RISC-V (pronounced "risk-five"). "V" stands for the Roman numeral for 5 and not "version". RISC-V is an open, free instruction set architecture ({term}`ISA`) used to design CPUs.
 
 Rocks
-    *Work in Progress*
+    Rocks has several meanings in software and computer contexts. The most common in software development are:
+            * LuaRocks - If discussing Lua programming
+            * "It rocks!" (slang) - General enthusiastic praise
+            * RocksDB - If discussing databases/storage
+            * "Rock solid" - Describing stability
+            * Agile "Rocks" - In project management context
 
 ROM
 Read-Only Memory
